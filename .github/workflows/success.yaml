@@ -1,0 +1,10 @@
+name: Successful Push
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 22f3000819@ds.study.iitm.ac.in
+        run: echo "Push Operation Successful."
