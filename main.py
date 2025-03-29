@@ -22,20 +22,20 @@ def getmarks(name: List[str] = Query(default=[])):
     response = requests.post('http://localhost:8000/api/p2ga2q6', json=data)
     return response.json()
 
-@app.get("/api/ga2q10")
-def get_students(class_: list[str] = Query(None, alias="class")):
+@app.get("/api/ga2q9")
+def get_students(class_: List[str] = Query(default=[], alias="class")):
+    print("first line")
     """
     Fetch student data from the CSV. If 'class' query parameters are provided,
     filter students by those classes.
     """
-    if class_:
-        filtered_df = df[df["class"].isin(class_)]
-    else:
-        filtered_df = df
-
-    # Convert to dictionary list
-    students = filtered_df.to_dict(orient="records")
-    return {"students": students}
+    data = {
+        "class_": class_
+    }
+    print('data')
+    response = requests.post('http://localhost:8000/api/p2ga2q9', json=data)
+    print('response')
+    return response.json()
 
 @app.get('/')
 def check():
