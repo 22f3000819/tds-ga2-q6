@@ -3,7 +3,7 @@ name: Daily Commit
 on:
   schedule:
     - cron: "17 6 * * *" # Runs daily at 06:17 UTC
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   daily_commit:
@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Use the built-in GitHub token
 
       - name: 22f3000819@ds.study.iitm.ac.in
         run: |
@@ -23,4 +25,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add daily_commit_log.txt
           git commit -m "Automated commit: $(date)"
-          git push
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the token to authenticate
